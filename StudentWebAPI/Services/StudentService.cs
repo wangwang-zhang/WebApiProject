@@ -18,5 +18,9 @@ public class StudentService
     {
         return _studentDao.GetAll().Find(student => student.StudentId == id);
     }
-    
+
+    public List<Student> GetStudentBetween(int beginAge, int endAge)
+    {
+        return _studentDao.GetAll().FindAll(student => student.Age >= beginAge && student.Age <= endAge);
+    }
 }

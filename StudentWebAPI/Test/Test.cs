@@ -29,5 +29,17 @@ public class Test
         
         Assert.Equal("Tom",student?.Name);
     }
+
+    [Fact]
+    public void should_Return_Student_List_between_10_And_16()
+    {
+        var studentDaoMock = new Mock<IStudentDao>();
+        studentDaoMock.Setup(studentDao => studentDao.GetAll()).Returns(_students);
+        
+        StudentService studentService = new StudentService(studentDaoMock.Object);
+        List<Student> student = studentService.GetStudentBetween(10,16);
+        
+        Assert.Equal(3,student.Count);
+    }
     
 }
