@@ -6,10 +6,10 @@ namespace StudentWebAPI.Services;
 
 public class StudentService
 {
-    private readonly StudentDao _studentDao;
+    private readonly IStudentDao _studentDao;
 
 
-    public StudentService(StudentDao studentDao)
+    public StudentService(IStudentDao studentDao)
     {
         _studentDao = studentDao;
     }

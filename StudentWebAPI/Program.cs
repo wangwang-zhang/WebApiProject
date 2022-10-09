@@ -11,7 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<StudentService>();
-builder.Services.AddSingleton<StudentDao>();
+builder.Services.AddSingleton<IStudentDao,StudentDaoImpl>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
