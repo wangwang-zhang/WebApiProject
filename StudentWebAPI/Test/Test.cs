@@ -9,15 +9,7 @@ using Xunit;
 
 public class Test
 {
-    [Fact]
-    public void Should_Return_Student_By_Id()
-    {
-        IStudentDao studentDao = new StudentDaoImpl();
-        StudentService studentService = new StudentService(studentDao);
-        var student = studentService.GetStudentById("1");
-        Assert.Equal("Tom",student?.Name);
-    }
-    
+
     private readonly List<Student> _students = new List<Student>
     {
         new Student("1", "Tom", "13567845677",10),
