@@ -14,6 +14,9 @@ public class Test
     {
         new Student("1", "Tom", "13567845677",10),
         new Student("2", "Amy", "13867045471",28),
+        new Student("3", "Cindy", "13567352398", 30),
+        new Student("4", "David", "13967152312", 15),
+        new Student("5", "David", "18765492546", 16)
     };
     [Fact]
     public void Should_Return_Student_By_Id_Mock()
@@ -26,4 +29,5 @@ public class Test
         
         Assert.Equal("Tom",student?.Name);
     }
+    
 }
