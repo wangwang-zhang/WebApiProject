@@ -33,4 +33,9 @@ public class StudentService
     {
         return _studentDao.AddStudent(student);
     }
+    
+    public List<Student> GetAllStudents()
+    {
+        return _studentDao.GetAll();
+    }
 }

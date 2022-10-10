@@ -69,5 +69,15 @@ public class Test
         
         Assert.Equal(6,students.Count);
     }
+
+    [Fact]
+    public void Should_Return_All_Students()
+    {
+        var studentDaoMock = new Mock<IStudentDao>();
+        studentDaoMock.Setup(studentDao => studentDao.GetAll()).Returns(_students);
+        StudentService studentService = new StudentService(studentDaoMock.Object);
+        List<Student> students = studentService.GetAllStudents();
+        Assert.Equal(5, students.Count);
+    }
     
 }
