@@ -27,4 +27,10 @@ public class StudentController : ControllerBase
         return _studentService.GetStudentBetween(ageRangeModel.MinAge, ageRangeModel.MaxAge);
     }
     
+    [HttpGet("prefix/{prefix}")]
+    public List<Student> GetStudentsByPhonePrefix([FromRoute] string prefix)
+    {
+        return _studentService.GetStudentByPhone(prefix);
+    }
+    
 }
