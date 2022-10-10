@@ -23,4 +23,9 @@ public class StudentService
     {
         return _studentDao.GetAll().FindAll(student => student.Age >= beginAge && student.Age <= endAge);
     }
+
+    public List<Student> GetStudentByPhone(string prefix)
+    {
+        return _studentDao.GetAll().FindAll(student => student.Phone.StartsWith(prefix));
+    }
 }

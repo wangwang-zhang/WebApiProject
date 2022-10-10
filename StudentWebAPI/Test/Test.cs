@@ -42,4 +42,16 @@ public class Test
         Assert.Equal(3,student.Count);
     }
     
+    [Fact]
+    public void should_Return_Student_List_Whose_Phone_Begin_With_135()
+    {
+        var studentDaoMock = new Mock<IStudentDao>();
+        studentDaoMock.Setup(studentDao => studentDao.GetAll()).Returns(_students);
+        
+        StudentService studentService = new StudentService(studentDaoMock.Object);
+        List<Student> student = studentService.GetStudentByPhone("135");
+        
+        Assert.Equal(2,student.Count);
+    }
+    
 }
