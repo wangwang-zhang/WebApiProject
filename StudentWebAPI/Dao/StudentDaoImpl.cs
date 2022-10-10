@@ -34,4 +34,13 @@ public class StudentDaoImpl : IStudentDao
         _logger.LogInformation("Have already added a new student: " + studentJsonString);
         return _students;
     }
+
+    public List<Student> DeleteStudent(string id)
+    {
+        Student student = _students.Find(student => student.StudentId == id);
+        _students.Remove(student);
+        var studentJsonString = JsonConvert.SerializeObject(student);
+        _logger.LogInformation("Have already deleted a new student: " + studentJsonString);
+        return _students;
+    }
 }

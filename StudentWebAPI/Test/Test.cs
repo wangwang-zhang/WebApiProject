@@ -79,5 +79,17 @@ public class Test
         List<Student> students = studentService.GetAllStudents();
         Assert.Equal(5, students.Count);
     }
+
+    [Fact]
+    public void Should_Delete_Student_Whose_Id_Is_3()
+    {
+        string studentId = "3";
+        _students.Remove(_students.Find(student => student.StudentId == studentId));
+        var studentDaoMock = new Mock<IStudentDao>();
+        studentDaoMock.Setup(studentDao => studentDao.DeleteStudent(It.IsAny<string>())).Returns(_students);
+        StudentService studentService = new StudentService(studentDaoMock.Object);
+        List<Student> students = studentService.DeleteStudent(studentId);
+        Assert.Equal(4, students.Count);
+    }
     
 }

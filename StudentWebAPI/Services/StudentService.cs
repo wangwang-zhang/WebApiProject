@@ -38,4 +38,9 @@ public class StudentService
     {
         return _studentDao.GetAll();
     }
+
+    public List<Student> DeleteStudent(String id)
+    {
+        return _studentDao.DeleteStudent(id);
+    }
 }
