@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace StudentWebAPI.Models;
 
@@ -19,7 +20,8 @@ public class Student
     [MaxLength(16, ErrorMessage = "名字最长16个字符")]
     public string Name { get; set; }
     
-    [Phone] 
+    [Phone(ErrorMessage = "号码不是手机号")]
+    [RegularExpression("^((13[0-9])|(15[^4,\\D])|(18[0,0-9]))\\d{8}$", ErrorMessage = "不符合手机号码规范")]
     public string Phone { get; set; }
     
     [Range(6,18, ErrorMessage = "年龄应该在6-18之间")]
