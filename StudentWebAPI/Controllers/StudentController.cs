@@ -38,5 +38,11 @@ public class StudentController : ControllerBase
     {
         return _studentService.AddStudent(student);
     }
+
+    [HttpGet("getAll")]
+    public List<Student> GetAll()
+    {
+        return _studentService.GetAllStudents();
+    }
     
 }
