@@ -29,7 +29,7 @@ public class StudentService
         return _studentDao.GetAll().FindAll(student => student.Phone.StartsWith(prefix));
     }
 
-    public List<Student> AddStudent(Student student)
+    public String AddStudent(Student student)
     {
         return _studentDao.AddStudent(student);
     }

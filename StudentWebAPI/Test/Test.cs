@@ -61,13 +61,13 @@ public class Test
         _students.Add(student);
         
         var studentDaoMock = new Mock<IStudentDao>();
-        studentDaoMock.Setup(studentDao => studentDao.AddStudent(It.IsAny<Student>())).Returns(_students);
+        studentDaoMock.Setup(studentDao => studentDao.AddStudent(student)).Returns("Phil@thoughtworks.com");
 
         StudentService studentService = new StudentService(studentDaoMock.Object);
        
-        List<Student> students = studentService.AddStudent(student);
+        string resultEmail = studentService.AddStudent(student);
         
-        Assert.Equal(6,students.Count);
+        Assert.Equal("Phil@thoughtworks.com",resultEmail);
     }
 
     [Fact]

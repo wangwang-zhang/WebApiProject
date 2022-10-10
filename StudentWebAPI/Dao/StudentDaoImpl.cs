@@ -6,6 +6,8 @@ namespace StudentWebAPI.Dao;
 public class StudentDaoImpl : IStudentDao
 {
     private readonly ILogger _logger;
+    private readonly IConfiguration _configuration;
+    
     
     private readonly List<Student> _students = new List<Student>
     {
@@ -17,9 +19,10 @@ public class StudentDaoImpl : IStudentDao
         new Student("6", "Henry", "13876666666",16),
     };
 
-    public StudentDaoImpl(ILogger logger)
+    public StudentDaoImpl(ILogger logger, IConfiguration configuration)
     {
         _logger = logger;
+        _configuration = configuration;
     }
 
     public List<Student> GetAll()
@@ -27,12 +30,12 @@ public class StudentDaoImpl : IStudentDao
         return _students;
     }
 
-    public List<Student> AddStudent(Student student)
+    public String AddStudent(Student student)
     {
         _students.Add(student);
         var studentJsonString = JsonConvert.SerializeObject(student);
         _logger.LogInformation("Have already added a new student: " + studentJsonString);
-        return _students;
+        return student.Name + _configuration.GetValue<String>("Domain");
     }
 
     public List<Student> DeleteStudent(string id)

@@ -5,7 +5,7 @@ using StudentWebAPI.Services;
 namespace StudentWebAPI.Controllers;
 
 [ApiController]
-[Route("[Controller]")]
+[Route("/Students")]
 public class StudentController : ControllerBase
 {
     private readonly StudentService _studentService;
@@ -33,25 +33,25 @@ public class StudentController : ControllerBase
         return _studentService.GetStudentByPhone(prefix);
     }
     
-    [HttpPost("addition")]
-    public List<Student> AddStudent([FromBody] Student student)
+    [HttpPost]
+    public string AddStudent([FromBody] Student student)
     {
         return _studentService.AddStudent(student);
     }
 
-    [HttpGet("all")]
+    [HttpGet]
     public List<Student> GetAll()
     {
         return _studentService.GetAllStudents();
     }
 
-    [HttpDelete("delete/{id}")]
+    [HttpDelete("{id}")]
     public List<Student> DeleteStudent(string id)
     {
         return _studentService.DeleteStudent(id);
     }
 
-    [HttpPut("update")]
+    [HttpPut]
     public List<Student> UpdateStudent([FromBody] Student student)
     {
         return _studentService.UpdateStudent(student.StudentId, student.Phone, student.Age);
