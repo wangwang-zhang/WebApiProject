@@ -51,4 +51,10 @@ public class StudentController : ControllerBase
         return _studentService.DeleteStudent(id);
     }
 
+    [HttpPut("update")]
+    public List<Student> UpdateStudent([FromBody] Student student)
+    {
+        return _studentService.UpdateStudent(student.StudentId, student.Phone, student.Age);
+    }
+
 }
