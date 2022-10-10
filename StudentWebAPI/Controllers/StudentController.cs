@@ -21,7 +21,7 @@ public class StudentController : ControllerBase
         return _studentService.GetStudentById(id);
     }
     
-    [HttpGet("between")]
+    [HttpGet("ageRange")]
     public List<Student> GetStudentsByAgeRange([FromBody] AgeRangeModel ageRangeModel)
     {
         return _studentService.GetStudentBetween(ageRangeModel.MinAge, ageRangeModel.MaxAge);
@@ -33,13 +33,13 @@ public class StudentController : ControllerBase
         return _studentService.GetStudentByPhone(prefix);
     }
     
-    [HttpPost("addStudent")]
+    [HttpPost("addition")]
     public List<Student> AddStudent([FromBody] Student student)
     {
         return _studentService.AddStudent(student);
     }
 
-    [HttpGet("getAll")]
+    [HttpGet("all")]
     public List<Student> GetAll()
     {
         return _studentService.GetAllStudents();
