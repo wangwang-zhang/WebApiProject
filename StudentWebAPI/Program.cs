@@ -12,6 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<StudentService>();
 builder.Services.AddSingleton<IStudentDao,StudentDaoImpl>();
+builder.Services.AddTransient<ILogger>(s => s.GetRequiredService<ILogger<Program>>());
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
