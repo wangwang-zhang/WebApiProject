@@ -21,4 +21,10 @@ public class StudentController : ControllerBase
         return _studentService.GetStudentById(id);
     }
     
+    [HttpGet("between")]
+    public List<Student> GetStudentsByAgeRange([FromBody] AgeRangeModel ageRangeModel)
+    {
+        return _studentService.GetStudentBetween(ageRangeModel.MinAge, ageRangeModel.MaxAge);
+    }
+    
 }
