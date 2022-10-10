@@ -17,4 +17,10 @@ public class StudentDaoImpl : IStudentDao
     {
         return _students;
     }
+
+    public List<Student> AddStudent(Student student)
+    {
+        _students.Add(student);
+        return _students;
+    }
 }

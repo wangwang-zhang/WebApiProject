@@ -54,4 +54,20 @@ public class Test
         Assert.Equal(2,student.Count);
     }
     
+    [Fact]
+    public void should_Return_New_Student_List_When_Added_New_Student()
+    {
+        Student student = new Student("6", "Phil", "13467529087", 19);
+        _students.Add(student);
+        
+        var studentDaoMock = new Mock<IStudentDao>();
+        studentDaoMock.Setup(studentDao => studentDao.AddStudent(It.IsAny<Student>())).Returns(_students);
+
+        StudentService studentService = new StudentService(studentDaoMock.Object);
+       
+        List<Student> students = studentService.AddStudent(student);
+        
+        Assert.Equal(6,students.Count);
+    }
+    
 }
