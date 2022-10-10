@@ -1,9 +1,12 @@
+using Newtonsoft.Json;
 using StudentWebAPI.Models;
 
 namespace StudentWebAPI.Dao;
 
 public class StudentDaoImpl : IStudentDao
 {
+    private readonly ILogger _logger;
+    
     private readonly List<Student> _students = new List<Student>
     {
         new Student("1", "Tom", "13567845677",10),
@@ -13,6 +16,12 @@ public class StudentDaoImpl : IStudentDao
         new Student("5", "Lucas", "13587653211",15),
         new Student("6", "Henry", "13876666666",16),
     };
+
+    public StudentDaoImpl(ILogger logger)
+    {
+        _logger = logger;
+    }
+
     public List<Student> GetAll()
     {
         return _students;
@@ -21,6 +30,8 @@ public class StudentDaoImpl : IStudentDao
     public List<Student> AddStudent(Student student)
     {
         _students.Add(student);
+        var studentJsonString = JsonConvert.SerializeObject(student);
+        _logger.LogInformation("Have already added a new student: " + studentJsonString);
         return _students;
     }
 }
