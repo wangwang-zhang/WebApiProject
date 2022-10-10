@@ -33,4 +33,10 @@ public class StudentController : ControllerBase
         return _studentService.GetStudentByPhone(prefix);
     }
     
+    [HttpPost("addStudent")]
+    public List<Student> AddStudent([FromBody] Student student)
+    {
+        return _studentService.AddStudent(student);
+    }
+    
 }
