@@ -43,4 +43,9 @@ public class StudentService
     {
         return _studentDao.DeleteStudent(id);
     }
+    
+    public List<Student> UpdateStudent(string id, string phone, int age)
+    {
+        return _studentDao.UpdateStudent(id, phone, age);
+    }
 }

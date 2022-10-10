@@ -16,7 +16,7 @@ public class Test
         new Student("2", "Amy", "13867045471",28),
         new Student("3", "Cindy", "13567352398", 30),
         new Student("4", "David", "13967152312", 15),
-        new Student("5", "David", "18765492546", 16)
+        new Student("5", "Henry", "18765492546", 16)
     };
     [Fact]
     public void Should_Return_Student_By_Id_Mock()
@@ -91,5 +91,21 @@ public class Test
         List<Student> students = studentService.DeleteStudent(studentId);
         Assert.Equal(4, students.Count);
     }
-    
+
+    [Fact]
+    public void Should_Update_Student_Phone_And_Age_By_Id()
+    {
+        string studentId = "3";
+        string phone = "10010001000";
+        int age = 88;
+        _students.Find(student => student.StudentId == studentId)!.Phone = phone;
+        _students.Find(student => student.StudentId == studentId)!.Age = age;
+        var studentDaoMock = new Mock<IStudentDao>();
+        studentDaoMock.Setup(studentDao => studentDao
+                .UpdateStudent(studentId, phone, age))
+            .Returns(_students);
+        StudentService studentService = new StudentService(studentDaoMock.Object);
+        List<Student> students = studentService.UpdateStudent(studentId, phone, age);
+        Assert.Equal("10010001000", students[Int32.Parse(studentId) - 1].Phone);
+    }
 }
