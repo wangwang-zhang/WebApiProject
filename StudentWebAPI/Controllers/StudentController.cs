@@ -44,5 +44,11 @@ public class StudentController : ControllerBase
     {
         return _studentService.GetAllStudents();
     }
-    
+
+    [HttpDelete("delete/{id}")]
+    public List<Student> DeleteStudent(string id)
+    {
+        return _studentService.DeleteStudent(id);
+    }
+
 }
