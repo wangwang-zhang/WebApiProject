@@ -1,5 +1,6 @@
 
 using StudentWebAPI.Dao;
+using StudentWebAPI.Filters;
 using StudentWebAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<StudentService>();
 builder.Services.AddSingleton<IStudentDao,StudentDaoImpl>();
 builder.Services.AddTransient<ILogger>(s => s.GetRequiredService<ILogger<Program>>());
+builder.Services.AddControllers(options => options.Filters.Add<ActionFilter>());
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
