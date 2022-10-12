@@ -1,4 +1,5 @@
 
+using AutoWrapper;
 using StudentWebAPI.Dao;
 using StudentWebAPI.Filters;
 using StudentWebAPI.Services;
@@ -30,5 +31,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.UseAutoWrapper();
 
 app.Run();
