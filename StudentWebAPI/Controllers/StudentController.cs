@@ -16,9 +16,12 @@ public class StudentController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public Student? Get([FromRoute] string id)
+    public Student Get([FromRoute] string id)
     {
-        return _studentService.GetStudentById(id);
+        var students =  _studentService.GetStudentById(id);
+        if(students == null)
+            throw new Exception($"No student whose id is {id}");
+        return students;
     }
     
     [HttpGet("ageRange")]
