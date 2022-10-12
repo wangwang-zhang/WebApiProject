@@ -1,5 +1,6 @@
 
-using AutoWrapper;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using StudentWebAPI.Dao;
 using StudentWebAPI.Filters;
 using StudentWebAPI.Services;
@@ -17,6 +18,7 @@ builder.Services.AddSingleton<IStudentDao,StudentDaoImpl>();
 builder.Services.AddTransient<ILogger>(s => s.GetRequiredService<ILogger<Program>>());
 builder.Services.AddControllers(options => options.Filters.Add<ResponseFilter>());
 builder.Services.AddControllers(options => options.Filters.Add<ActionFilter>());
+builder.Services.AddSingleton<IActionResultExecutor<ObjectResult>, ResponseWrapperExecutor>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -31,6 +33,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-app.UseAutoWrapper();
 
 app.Run();
