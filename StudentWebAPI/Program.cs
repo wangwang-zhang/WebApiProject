@@ -14,6 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<StudentService>();
 builder.Services.AddSingleton<IStudentDao,StudentDaoImpl>();
 builder.Services.AddTransient<ILogger>(s => s.GetRequiredService<ILogger<Program>>());
+builder.Services.AddControllers(options => options.Filters.Add<ResponseFilter>());
 builder.Services.AddControllers(options => options.Filters.Add<ActionFilter>());
 var app = builder.Build();
 
