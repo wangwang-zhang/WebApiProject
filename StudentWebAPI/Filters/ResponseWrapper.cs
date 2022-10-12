@@ -1,4 +1,4 @@
-using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization;
 
 namespace StudentWebAPI.Filters;
 
@@ -6,8 +6,8 @@ internal class ResponseWrapper<T>
 {
     public bool Success { set; get; }
     public T Result { set; get; }
-
-    [AllowNull]
+    
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public Error Error { get; set; }
 
 }
