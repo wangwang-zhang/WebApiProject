@@ -40,10 +40,13 @@ public class StudentDaoImpl : IStudentDao
 
     public List<Student> DeleteStudent(string id)
     {
-        Student student = _students.Find(student => student.StudentId == id);
-        _students.Remove(student);
-        var studentJsonString = JsonConvert.SerializeObject(student);
-        _logger.LogInformation("Have already deleted a new student: " + studentJsonString);
+        Student? student = _students.Find(student => student.StudentId == id);
+        if (student != null)
+        {
+            _students.Remove(student);
+            var studentJsonString = JsonConvert.SerializeObject(student);
+            _logger.LogInformation("Have already deleted a new student: " + studentJsonString);
+        }
         return _students;
     }
 
