@@ -31,9 +31,14 @@ public class StudentController : ControllerBase
     }
     
     [HttpGet("prefix/{prefix}")]
-    public List<Student> GetStudentsByPhonePrefix([FromRoute] string prefix)
+    public IActionResult GetStudentsByPhonePrefix([FromRoute] string prefix)
     {
-        return _studentService.GetStudentByPhone(prefix);
+        List<Student> students =  _studentService.GetStudentByPhone(prefix);
+        if (students.Count == 0)
+        {
+            return NotFound();
+        }
+        return Ok(students);
     }
     
     [HttpPost]

@@ -26,7 +26,7 @@ internal class ResponseWrapperExecutor : ObjectResultExecutor
             response.Result = null;
             response.Error = new Error
             {
-                ErrorMessage = "系统发生异常"
+                ErrorMessage = "Not Found！！！"
             };
         }
 
