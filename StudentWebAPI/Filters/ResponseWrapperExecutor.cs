@@ -1,6 +1,9 @@
+using System.Text;
+using HelpMate.Core.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 
 namespace StudentWebAPI.Filters;
 
@@ -27,6 +30,18 @@ internal class ResponseWrapperExecutor : ObjectResultExecutor
             response.Error = new Error
             {
                 ErrorMessage = "Not Found！！！"
+            };
+        }
+
+        if (result.StatusCode == 400)
+        {
+            string errorReason = result.Value.ToJson().Split("\n")[7].Trim().Trim('\"');
+            
+            response.Success = false;
+            response.Result = null;
+            response.Error = new Error()
+            {
+                ErrorMessage = errorReason
             };
         }
 

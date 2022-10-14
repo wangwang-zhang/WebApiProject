@@ -1,5 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Text.Json;
 
 namespace StudentWebAPI.Models;
 
@@ -13,18 +16,18 @@ public class Student
         Age = age;
     }
 
-    [Required(ErrorMessage = "学号不能为空")]
+    [Required(ErrorMessage = "Student id cannot be empty!")]
     public string StudentId { get; set; }
     
-    [Required(ErrorMessage = "姓名不能为空")]
-    [MaxLength(16, ErrorMessage = "名字最长16个字符")]
+    [Required(ErrorMessage = "Name cannot be empty")]
+    [MaxLength(16, ErrorMessage = "Name length cannot beyond 16 chars")]
     public string Name { get; set; }
     
-    [Phone(ErrorMessage = "号码不是手机号")]
-    [RegularExpression("^((13[0-9])|(15[^4,\\D])|(18[0,0-9]))\\d{8}$", ErrorMessage = "不符合手机号码规范")]
+    [Phone(ErrorMessage = "it's not phone number")]
+    [RegularExpression("^((13[0-9])|(15[^4,\\D])|(18[0,0-9]))\\d{8}$", ErrorMessage = "Can't identify phone number")]
     public string Phone { get; set; }
     
-    [Range(6,18, ErrorMessage = "年龄应该在6-18之间")]
+    [Range(6,18, ErrorMessage = "Age should be between 6 and 18")]
     public int Age { get; set; }
     
 }
