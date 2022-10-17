@@ -2,7 +2,7 @@ using System.Security.Claims;
 
 namespace StudentWebAPI.UserService;
 
-public class UserService
+public class UserService : IUserService
 {
     private readonly IHttpContextAccessor _httpContextAccessor;
 
@@ -16,7 +16,8 @@ public class UserService
         var result = string.Empty;
         if (_httpContextAccessor.HttpContext != null)
         {
-            result = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
+            result = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name)
+                     + "| authorization: " + _httpContextAccessor.HttpContext.Request.Headers.Authorization ;
         }
         return result;
     }
