@@ -12,16 +12,25 @@ namespace StudentWebAPI.Controllers;
 [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
-    { 
+    {
         public static User user = new User();
       private readonly IConfiguration _configuration;
+      private readonly IUserService _userService;
 
-      public AuthController(IConfiguration configuration)
+        public AuthController(IConfiguration configuration, IUserService userService)
         {
             _configuration = configuration;
+            _userService = userService;
         }
 
-      [HttpPost("register")]
+        [HttpGet, Authorize(Roles = "Admin")]
+        public ActionResult<string> GetMe()
+        {
+            var userName = _userService.GetMyName();
+            return Ok(userName);
+        }
+
+        [HttpPost("register")]
         public async Task<ActionResult<User>> Register(UserDto request)
         {
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
