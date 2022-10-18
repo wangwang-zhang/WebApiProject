@@ -13,7 +13,7 @@ namespace StudentWebAPI.Controllers;
 [ApiController]
 public class AuthController : ControllerBase
 {
-    public static User user = new User();
+    public static UserModel UserModel = new UserModel();
     private readonly IConfiguration _configuration;
     private readonly IUserService _userService;
 
@@ -31,40 +31,40 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("register")]
-    public async Task<ActionResult<User>> Register(UserDto request)
+    public async Task<ActionResult<UserModel>> Register(UserLogin request)
     {
         CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
-        user.Username = request.Username;
-        user.PasswordHash = passwordHash;
-        user.PasswordSalt = passwordSalt;
+        UserModel.Username = request.Username;
+        UserModel.PasswordHash = passwordHash;
+        UserModel.PasswordSalt = passwordSalt;
 
-        return Ok(user);
+        return Ok(UserModel);
     }
 
     [HttpPost("login")]
-    public async Task<ActionResult<string>> Login(UserDto request)
+    public async Task<ActionResult<string>> Login(UserLogin request)
     {
-        if (user.Username != request.Username)
+        if (UserModel.Username != request.Username)
         {
-            return BadRequest("User not found.");
+            return BadRequest("UserModel not found.");
         }
 
-        if (!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
+        if (!VerifyPasswordHash(request.Password, UserModel.PasswordHash, UserModel.PasswordSalt))
         {
             return BadRequest("Wrong password.");
         }
 
-        string token = CreateToken(user);
+        string token = CreateToken(UserModel);
 
         return Ok(token);
     }
 
-    private string CreateToken(User user)
+    private string CreateToken(UserModel userModel)
     {
         List<Claim> claims = new List<Claim>
         {
-            new(ClaimTypes.Name, user.Username),
+            new(ClaimTypes.Name, userModel.Username),
             new(ClaimTypes.Role, "Admin"),
         };
 
