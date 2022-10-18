@@ -61,6 +61,26 @@ public class AuthController : ControllerBase
 
         return Ok(token);
     }
+    [HttpPost("refresh-token")]
+    public async Task<ActionResult<string>> RefreshToken()
+    {
+        var refreshToken = Request.Cookies["refreshToken"];
+
+        if (!UserModel.RefreshToken.Equals(refreshToken))
+        {
+            return Unauthorized("Invalid Refresh Token.");
+        }
+        else if(UserModel.TokenExpires < DateTime.Now)
+        {
+            return Unauthorized("Token expired.");
+        }
+
+        string token = CreateToken(UserModel);
+        var newRefreshToken = GenerateRefreshToken();
+        SetRefreshToken(newRefreshToken);
+
+        return Ok(token);
+    }
 
     private RefreshToken GenerateRefreshToken()
     {
