@@ -56,6 +56,8 @@ public class AuthController : ControllerBase
         }
 
         string token = CreateToken(UserModel);
+        var refreshToken = GenerateRefreshToken();
+        SetRefreshToken(refreshToken);
 
         return Ok(token);
     }
