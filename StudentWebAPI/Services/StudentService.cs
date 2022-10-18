@@ -1,4 +1,3 @@
-
 using StudentWebAPI.Dao;
 using StudentWebAPI.Models;
 
@@ -33,7 +32,7 @@ public class StudentService
     {
         return _studentDao.AddStudent(student);
     }
-    
+
     public List<Student> GetAllStudents()
     {
         return _studentDao.GetAll();
@@ -43,7 +42,7 @@ public class StudentService
     {
         return _studentDao.DeleteStudent(id);
     }
-    
+
     public List<Student> UpdateStudent(string id, string phone, int age)
     {
         return _studentDao.UpdateStudent(id, phone, age);

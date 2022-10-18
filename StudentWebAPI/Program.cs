@@ -21,7 +21,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton<StudentService>();
-builder.Services.AddSingleton<IStudentDao,StudentDaoImpl>();
+builder.Services.AddSingleton<IStudentDao, StudentDaoImpl>();
 
 builder.Services.AddTransient<ILogger>(s => s.GetRequiredService<ILogger<Program>>());
 builder.Services.AddControllers(options => options.Filters.Add<ResponseFilter>());

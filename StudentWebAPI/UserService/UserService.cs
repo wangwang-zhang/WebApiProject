@@ -17,8 +17,9 @@ public class UserService : IUserService
         if (_httpContextAccessor.HttpContext != null)
         {
             result = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name)
-                     + "| authorization: " + _httpContextAccessor.HttpContext.Request.Headers.Authorization ;
+                     + "| authorization: " + _httpContextAccessor.HttpContext.Request.Headers.Authorization;
         }
+
         return result;
     }
 }

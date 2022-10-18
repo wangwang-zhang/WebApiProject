@@ -9,7 +9,7 @@ namespace StudentWebAPI.Controllers;
 public class StudentController : ControllerBase
 {
     private readonly StudentService _studentService;
-    
+
     public StudentController(StudentService studentService)
     {
         _studentService = studentService;
@@ -18,29 +18,30 @@ public class StudentController : ControllerBase
     [HttpGet("{id}")]
     public IActionResult Get([FromRoute] string id)
     {
-        var students =  _studentService.GetStudentById(id);
+        var students = _studentService.GetStudentById(id);
         if (students == null)
             return NotFound();
         return Ok(students);
     }
-    
+
     [HttpGet("ageRange")]
     public List<Student> GetStudentsByAgeRange([FromBody] AgeRangeModel ageRangeModel)
     {
         return _studentService.GetStudentBetween(ageRangeModel.MinAge, ageRangeModel.MaxAge);
     }
-    
+
     [HttpGet("prefix/{prefix}")]
     public IActionResult GetStudentsByPhonePrefix([FromRoute] string prefix)
     {
-        List<Student> students =  _studentService.GetStudentByPhone(prefix);
+        List<Student> students = _studentService.GetStudentByPhone(prefix);
         if (students.Count == 0)
         {
             return NotFound();
         }
+
         return Ok(students);
     }
-    
+
     [HttpPost]
     public string AddStudent([FromBody] Student student)
     {
@@ -64,5 +65,4 @@ public class StudentController : ControllerBase
     {
         return _studentService.UpdateStudent(student.StudentId, student.Phone, student.Age);
     }
-
 }

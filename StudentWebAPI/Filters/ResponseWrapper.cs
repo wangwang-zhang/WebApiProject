@@ -6,10 +6,9 @@ internal class ResponseWrapper<T>
 {
     public bool Success { set; get; }
     public T Result { set; get; }
-    
+
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public Error Error { get; set; }
-
 }
 
 internal class Error
