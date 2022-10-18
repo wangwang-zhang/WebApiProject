@@ -70,6 +70,19 @@ public class AuthController : ControllerBase
         };
         return refreshToken;
     }
+
+    private void SetRefreshToken(RefreshToken newRefreshToken)
+    {
+        var cookieOptions = new CookieOptions
+        {
+            HttpOnly = true,
+            Expires = newRefreshToken.Expires
+        };
+        Response.Cookies.Append("refreshToken", newRefreshToken.Token,cookieOptions);
+        UserModel.RefreshToken = newRefreshToken.Token;
+        UserModel.TokenCreated = newRefreshToken.Created;
+        UserModel.TokenExpires = newRefreshToken.Expires;
+    }
     private string CreateToken(UserModel userModel)
     {
         List<Claim> claims = new List<Claim>
