@@ -26,6 +26,7 @@ builder.Services.AddSingleton<IStudentDao, StudentDaoImpl>();
 builder.Services.AddTransient<ILogger>(s => s.GetRequiredService<ILogger<Program>>());
 builder.Services.AddControllers(options => options.Filters.Add<ResponseFilter>());
 builder.Services.AddControllers(options => options.Filters.Add<ActionFilter>());
+builder.Services.AddControllers(options => options.Filters.Add<AuthorizationFilter>());
 builder.Services.AddSingleton<IActionResultExecutor<ObjectResult>, ResponseWrapperExecutor>();
 builder.Services.AddSwaggerGen(options =>
 {
